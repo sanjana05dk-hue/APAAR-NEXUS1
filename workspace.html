@@ -1,0 +1,1122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>{{ title }} | APAAR NEXUS</title>
+
+    <style>
+        :root {
+            --navy: #10263f;
+            --blue: #1677e8;
+            --pale: #eef5fc;
+            --white: #ffffff;
+            --text: #1d2939;
+            --muted: #718096;
+            --border: #e3eaf2;
+            --green: #13865c;
+            --amber: #a76508;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: "Segoe UI", Arial, sans-serif;
+            background: #f5f7fb;
+            color: var(--text);
+        }
+
+        .sidebar {
+            position: fixed;
+            inset: 0 auto 0 0;
+            width: 245px;
+            background: var(--navy);
+            color: white;
+            padding: 27px 17px;
+        }
+
+        .brand {
+            font-size: 23px;
+            font-weight: 800;
+            letter-spacing: .4px;
+            margin: 5px 10px 4px;
+        }
+
+        .brand span {
+            color: #65b7ff;
+        }
+
+        .tagline {
+            color: #b5c6d9;
+            font-size: 10px;
+            letter-spacing: 2px;
+            margin: 0 10px 38px;
+        }
+
+        .nav-label {
+            color: #91a9c2;
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            margin: 20px 11px 12px;
+        }
+
+        .nav-link {
+            display: block;
+            text-decoration: none;
+            color: #d8e4f0;
+            padding: 14px 12px;
+            margin: 5px 0;
+            border-radius: 10px;
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+            background: #1677e8;
+            color: white;
+        }
+
+        .sidebar-note {
+            position: absolute;
+            bottom: 24px;
+            left: 20px;
+            right: 20px;
+            border-top: 1px solid #33485f;
+            padding-top: 17px;
+            color: #aebfd1;
+            font-size: 11px;
+            line-height: 1.7;
+        }
+
+        main {
+            margin-left: 245px;
+            padding: 35px;
+            max-width: 1500px;
+        }
+
+        .eyebrow {
+            color: var(--blue);
+            font-size: 10px;
+            font-weight: 800;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        h1 {
+            font-size: 29px;
+            margin: 9px 0;
+        }
+
+        .subtitle {
+            color: var(--muted);
+            font-size: 14px;
+            line-height: 1.6;
+            margin-bottom: 27px;
+        }
+
+        .hero {
+            background: linear-gradient(120deg, #123452, #176db5);
+            color: white;
+            padding: 27px;
+            border-radius: 18px;
+            margin-bottom: 25px;
+            box-shadow: 0 8px 25px #183d6014;
+        }
+
+        .hero-label {
+            display: inline-block;
+            padding: 6px 10px;
+            background: #ffffff1b;
+            border-radius: 20px;
+            font-size: 10px;
+            letter-spacing: 1px;
+            margin-bottom: 12px;
+        }
+
+        .hero h2 {
+            margin: 0 0 10px;
+            font-size: 23px;
+        }
+
+        .hero p {
+            color: #dbeafa;
+            font-size: 13px;
+            line-height: 1.7;
+            max-width: 700px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 18px;
+        }
+
+        .card {
+            background: var(--white);
+            border: 1px solid var(--border);
+            border-radius: 15px;
+            padding: 22px;
+            margin-bottom: 18px;
+            box-shadow: 0 4px 15px #142c4607;
+        }
+
+        .card h3 {
+            font-size: 16px;
+            margin: 0 0 12px;
+        }
+
+        .muted {
+            color: var(--muted);
+            font-size: 12px;
+            line-height: 1.7;
+        }
+
+        .stat {
+            font-size: 26px;
+            font-weight: 800;
+            color: var(--navy);
+            margin: 10px 0;
+        }
+
+        .badge {
+            display: inline-block;
+            border-radius: 20px;
+            padding: 6px 10px;
+            font-size: 11px;
+            font-weight: 700;
+        }
+
+        .verified {
+            color: var(--green);
+            background: #e7f7ef;
+        }
+
+        .pending {
+            color: var(--amber);
+            background: #fff2d8;
+        }
+
+        .button {
+            display: inline-block;
+            border: 0;
+            border-radius: 9px;
+            background: var(--blue);
+            color: white;
+            padding: 12px 17px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 12px;
+            cursor: pointer;
+        }
+
+        .button:hover {
+            background: #095fc2;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 13px;
+            border: 1px solid #d4deea;
+            border-radius: 9px;
+            margin: 8px 0 13px;
+            font-size: 13px;
+            outline-color: var(--blue);
+        }
+
+        label {
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        .table-wrap {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 12px;
+            min-width: 450px;
+        }
+
+        th, td {
+            text-align: left;
+            padding: 14px 10px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        th {
+            color: var(--muted);
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: .8px;
+        }
+
+        .timeline {
+            border-left: 2px solid #c9e0fa;
+            margin: 20px 0 5px 9px;
+            padding-left: 24px;
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 25px;
+        }
+
+        .timeline-item::before {
+            content: "";
+            position: absolute;
+            left: -31px;
+            top: 4px;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: var(--blue);
+            border: 3px solid #e4f0ff;
+        }
+
+        .node {
+            text-align: center;
+            padding: 16px 10px;
+            background: var(--pale);
+            border: 1px solid #dceafa;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        .connector {
+            text-align: center;
+            color: var(--blue);
+            font-size: 23px;
+            padding: 5px;
+        }
+
+        .notice {
+            background: #fff8e8;
+            border: 1px solid #f4e1b3;
+            border-radius: 10px;
+            padding: 13px;
+            font-size: 11px;
+            color: #79521a;
+            line-height: 1.7;
+            margin-top: 17px;
+        }
+
+        .empty {
+            text-align: center;
+            padding: 25px;
+            color: var(--muted);
+            font-size: 13px;
+        }
+
+        @media (max-width: 800px) {
+            .sidebar {
+                position: relative;
+                width: 100%;
+                padding: 18px;
+            }
+
+            .tagline {
+                margin-bottom: 15px;
+            }
+
+            .nav-label {
+                margin-top: 15px;
+            }
+
+            .sidebar-note {
+                display: none;
+            }
+
+            main {
+                margin-left: 0;
+                padding: 22px 15px;
+            }
+
+            .grid {
+                grid-template-columns: 1fr;
+            }
+
+            h1 {
+                font-size: 24px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<aside class="sidebar">
+    <div class="brand">N <span>APAAR</span> NEXUS</div>
+    <div class="tagline">ACADEMIC INTELLIGENCE</div>
+
+    <div class="nav-label">WORKSPACE</div>
+
+    <a class="nav-link" href="/">▦ &nbsp; Overview</a>
+
+    <a class="nav-link {% if page == 'detective' %}active{% endif %}"
+       href="{{ url_for('detective') }}">
+       ◉ &nbsp; Identity Detective
+    </a>
+
+    <a class="nav-link {% if page == 'journey' %}active{% endif %}"
+       href="{{ url_for('journey') }}">
+       ◷ &nbsp; Academic Journey
+    </a>
+
+    <a class="nav-link {% if page == 'trustgraph' %}active{% endif %}"
+       href="{{ url_for('trustgraph') }}">
+       ⌘ &nbsp; TrustGraph
+    </a>
+
+    <a class="nav-link {% if page == 'investigations' %}active{% endif %}"
+       href="{{ url_for('investigations') }}">
+       ▤ &nbsp; Investigation Centre
+    </a>
+
+    <div class="sidebar-note">
+        APAAR NEXUS<br>
+        Academic verification prototype<br>
+        <span style="color:#65b7ff;">● Demonstration environment</span>
+    </div>
+</aside>
+
+<main>
+    <div class="eyebrow">Academic verification platform</div>
+    <h1>{{ title }}</h1>
+    <p class="subtitle">{{ subtitle }}</p>
+
+    {% if page == "detective" %}
+    <!-- NEXUS INTELLIGENCE ENGINE -->
+<div class="card" style="margin-top: 24px; padding: 24px;">
+    <form method="POST" action="{{ url_for('detective') }}" style="margin: 20px 0;">
+    <input type="hidden" name="action" value="scan">
+
+    <button type="submit"
+        style="background: linear-gradient(135deg, #2563eb, #4f46e5);
+               color: white;
+               border: none;
+               padding: 14px 24px;
+               border-radius: 10px;
+               font-size: 15px;
+               font-weight: bold;
+               cursor: pointer;
+               box-shadow: 0 5px 15px rgba(37, 99, 235, 0.2);">
+        🧠 RUN INTELLIGENCE SCAN
+    </button>
+</form>
+    <h2>🧠 NEXUS Intelligence Engine</h2>
+
+    <p style="color: #64748b;">
+        Automated comparison of demonstration records to identify
+        potentially similar identities for human review.
+    </p>
+
+    <div style="margin: 20px 0; padding: 14px; background: #eff6ff; border-radius: 10px;">
+        {% if scan_run %}
+<div style="margin: 20px 0; padding: 20px; background: #eff6ff; border-radius: 12px;">
+    <h3 style="margin-top: 0;">📊 Intelligence Scan Report</h3>
+
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 14px;">
+
+        <div style="background: white; padding: 16px; border-radius: 10px;">
+            <p style="margin: 0; color: #64748b;">Records Analysed</p>
+            <h2 style="margin-bottom: 0;">{{ students|length }}</h2>
+        </div>
+
+        <div style="background: white; padding: 16px; border-radius: 10px;">
+            <p style="margin: 0; color: #64748b;">Potential Matches</p>
+            <h2 style="margin-bottom: 0;">{{ identity_alerts|length }}</h2>
+        </div>
+
+        <div style="background: white; padding: 16px; border-radius: 10px;">
+            <p style="margin: 0; color: #64748b;">Not Flagged</p>
+            <h2 style="margin-bottom: 0;">{{ students|length }}</h2>
+        </div>
+
+    </div>
+
+    <p style="margin-bottom: 0; color: #475569; font-size: 13px;">
+        This is a rule-based demonstration. A record not flagged is not
+        necessarily verified, and potential matches require human review.
+    </p>
+</div>
+{% endif %}
+
+    {% if identity_alerts %}
+        {% for alert in identity_alerts %}
+            <div style="border: 1px solid #e2e8f0; border-left: 5px solid {% if alert.priority == 'High' %}#dc2626{% else %}#d97706{% endif %}; border-radius: 10px; padding: 18px; margin-bottom: 14px;">
+
+                <div style="display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap;">
+                    <h3 style="margin: 0;">
+                        {{ alert.student_1 }} ↔ {{ alert.student_2 }}
+                    </h3>
+
+                    <span style="font-weight: bold;">
+                        {{ alert.priority }} Priority
+                    </span>
+                </div>
+
+                <p>
+                    <strong>Record IDs:</strong>
+                    {{ alert.student_1_id }} and {{ alert.student_2_id }}
+                </p>
+
+                <p>
+                    <strong>Name similarity:</strong>
+                    {{ alert.name_similarity }}%
+                </p>
+
+                <p><strong>Reasons for review:</strong></p>
+
+                <ul>
+                    {% for reason in alert.reasons %}
+                        <li>{{ reason }}</li>
+                    {% endfor %}
+                </ul>
+
+                <p style="color: #64748b; font-size: 13px;">
+                    ⚠️ {{ alert.message }}
+                </p>
+                <form method="POST" action="{{ url_for('create_case_route') }}" style="margin-top: 16px;">
+    <input type="hidden" name="alert_index" value="{{ loop.index0 }}">
+
+    <button type="submit"
+        style="background: #0f766e;
+               color: white;
+               border: none;
+               padding: 11px 18px;
+               border-radius: 8px;
+               font-weight: bold;
+               cursor: pointer;">
+        📂 CREATE INVESTIGATION CASE
+    </button>
+</form>
+            </div>
+        {% endfor %}
+    {% else %}
+        <div style="padding: 18px; background: #f0fdf4; border-radius: 10px;">
+            <strong>✅ No potential matches flagged.</strong>
+            <p style="margin-bottom: 0;">
+                No records crossed the current comparison thresholds.
+                This does not guarantee that records are unique.
+            </p>
+        </div>
+    {% endif %}
+
+    <p style="font-size: 12px; color: #64748b; margin-top: 18px;">
+        DEMONSTRATION ONLY — This analysis does not access official
+        APAAR data and does not establish identity or fraud.
+        Human verification is required.
+    </p>
+</div>
+
+    <section class="hero">
+        <span class="hero-label">MODULE A · IDENTITY INTELLIGENCE</span>
+        <h2>Find the record. Examine the evidence.</h2>
+        <p>
+            Search demonstration records by student name, record ID,
+            institution, or course. Search results are not official
+            identity verification.
+        </p>
+    </section>
+
+    <section class="card">
+        <h3>Student Record Search</h3>
+
+        <form method="POST" action="{{ url_for('detective') }}">
+            <label for="query">Search records</label>
+            <input
+                id="query"
+                type="text"
+                name="query"
+                value="{{ query }}"
+                placeholder="Try STU1002, Ananya Rao, or Data Science"
+            >
+            <button class="button" type="submit">Search Records →</button>
+        </form>
+    </section>
+
+    {% if query %}
+    <section class="card">
+        <h3>Search Results</h3>
+
+        {% if results %}
+        <div class="table-wrap">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Record ID</th>
+                        <th>Student</th>
+                        <th>Institution</th>
+                        <th>Course</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for student in results %}
+                    <tr>
+                        <td>{{ student.id }}</td>
+                        <td>{{ student.name }}</td>
+                        <td>{{ student.institution }}</td>
+                        <td>{{ student.course }}</td>
+                        <td>
+                            <span class="badge {% if student.status == 'Verified' %}verified{% else %}pending{% endif %}">
+                                {{ student.status }}
+                            </span>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        {% else %}
+        <div class="empty">
+            No matching demonstration records found.
+            Try a different name, ID, institution, or course.
+        </div>
+        {% endif %}
+    </section>
+    {% endif %}
+
+   
+    <section class="card">
+        <h3>🧠 NEXUS Identity Intelligence</h3>
+        <p class="muted">
+            Potential record matches are identified using name similarity
+            and institution information. Every alert requires human review.
+        </p>
+    </section>
+
+    <section class="card">
+        <h3>Identity Analysis Results</h3>
+
+        {% if identity_alerts %}
+            {% for alert in identity_alerts %}
+            <div style="border:1px solid var(--border); border-radius:12px; padding:18px; margin:15px 0;">
+                <div style="display:flex; justify-content:space-between; gap:12px; flex-wrap:wrap;">
+                    <strong>{{ alert.student_1 }} ↔ {{ alert.student_2 }}</strong>
+                    <span class="badge {% if alert.priority == 'High' %}pending{% else %}verified{% endif %}">
+                        {{ alert.priority }} Review
+                    </span>
+                </div>
+
+                <p class="muted">
+                    {{ alert.student_1_id }} · {{ alert.student_2_id }}
+                </p>
+
+                <p>
+                    <strong>Name similarity:</strong>
+                    {{ alert.name_similarity }}%
+                </p>
+
+                <p>
+                    <strong>Review reasons:</strong>
+                    {{ alert.reasons | join(", ") }}
+                </p>
+
+                <p class="muted">{{ alert.message }}</p>
+            </div>
+            {% endfor %}
+        {% else %}
+            <div class="empty">
+                No potential matches were detected in the current
+                demonstration dataset.
+            </div>
+        {% endif %}
+
+        <div class="notice">
+            Similarity scores are screening signals, not proof of duplicate
+            identity or fraud. Reviewers must verify records using
+            authorized evidence.
+        </div>
+    </section>
+
+    {% elif page == "journey" %}
+
+    <section class="hero">
+        <span class="hero-label">MODULE B · ACADEMIC INTELLIGENCE</span>
+        <h2>Every academic record tells part of a story.</h2>
+        <p>
+            Explore the available sample records and their academic
+            details in a unified timeline view.
+        </p>
+    </section>
+
+    {% for student in students %}
+    <section class="card">
+        <h3>{{ student.name }}</h3>
+        <p class="muted">
+            Record ID: {{ student.id }} ·
+            {{ student.institution }}
+        </p>
+
+        <div class="timeline">
+            <div class="timeline-item">
+                <strong>Academic year {{ student.year }}</strong>
+                <p class="muted">Course: {{ student.course }}</p>
+                <span class="badge {% if student.status == 'Verified' %}verified{% else %}pending{% endif %}">
+                    {{ student.status }}
+                </span>
+            </div>
+        </div>
+    </section>
+    {% endfor %}
+
+    <div class="notice">
+        This timeline displays only the academic details available
+        in the demonstration dataset. It does not represent a complete
+        official academic history.
+    </div>
+
+    {% elif page == "trustgraph" %}
+
+    <section class="hero">
+        <span class="hero-label">MODULE C · RELATIONSHIP INTELLIGENCE</span>
+        <h2>Connect records. Make relationships easier to understand.</h2>
+        <p>
+            Explore the sample student records and their associated
+            institution and course information.
+        </p>
+    </section>
+
+    <section class="card">
+        <h3>Demonstration Relationship Map</h3>
+        <p class="muted">
+            Each group connects a student record to its institution
+            and course. These are data relationships, not proof of identity.
+        </p>
+
+        {% for student in students %}
+        <div style="margin:20px 0;">
+            <div class="node">
+                {{ student.name }}<br>
+                <span class="muted">{{ student.id }}</span>
+            </div>
+
+            <div class="connector">↓</div>
+
+            <div class="node">
+                {{ student.institution }}
+            </div>
+
+            <div class="connector">↓</div>
+
+            <div class="node">
+                {{ student.course }} · {{ student.year }}
+            </div>
+        </div>
+        {% endfor %}
+    </section>
+
+    <div class="notice">
+        The current TrustGraph is a structured relationship view.
+        Interactive graph visualization and cross-record anomaly
+        detection can be added in a later development phase.
+    </div>
+
+   {% elif page == "investigations" %}
+
+<section class="card" style="margin-top: 24px; padding: 24px;">
+
+    <h2>📂 Investigation Case Register</h2>
+
+    <p class="muted">
+        Review and track cases created from potential identity matches.
+    </p>
+
+  <!-- CASE SUMMARY DASHBOARD --><div style="display: flex; gap: 14px; flex-wrap: wrap; margin: 20px 0;">
+
+    <!-- TOTAL CASES -->
+    <div style="background: #eff6ff; border: 1px solid #bfdbfe; padding: 16px; border-radius: 12px; flex: 1; min-width: 130px;">
+        <p style="margin: 0; color: #1d4ed8;">📂 Total Cases</p>
+        <h2 style="margin: 8px 0 0;">{{ total_cases }}</h2>
+    </div>
+
+    <!-- OPEN CASES -->
+    <div style="background: #dcfce7; border: 1px solid #bbf7d0; padding: 16px; border-radius: 12px; flex: 1; min-width: 130px;">
+        <p style="margin: 0; color: #166534;">🟢 Open Cases</p>
+        <h2 style="margin: 8px 0 0;">{{ open_cases }}</h2>
+    </div>
+
+    <!-- UNDER REVIEW -->
+    <div style="background: #fef3c7; border: 1px solid #fde68a; padding: 16px; border-radius: 12px; flex: 1; min-width: 130px;">
+        <p style="margin: 0; color: #92400e;">🟡 Under Review</p>
+        <h2 style="margin: 8px 0 0;">{{ under_review_cases }}</h2>
+    </div>
+
+    <!-- CLOSED CASES -->
+    <div style="background: #f1f5f9; border: 1px solid #cbd5e1; padding: 16px; border-radius: 12px; flex: 1; min-width: 130px;">
+        <p style="margin: 0; color: #475569;">⚪ Closed Cases</p>
+        <h2 style="margin: 8px 0 0;">{{ closed_cases }}</h2>
+    </div>
+
+    <!-- VERIFICATION REQUIRED -->
+    <div style="background: #f3e8ff; border: 1px solid #e9d5ff; padding: 16px; border-radius: 12px; flex: 1; min-width: 160px;">
+        <p style="margin: 0; color: #7e22ce;">🟣 Verification Required</p>
+        <h2 style="margin: 8px 0 0;">{{ verification_required }}</h2>
+    </div>
+
+</div>
+
+    <!-- CASE LIST -->
+    {% if cases %}
+
+        {% for case in cases|reverse %}
+
+        <div style="border: 1px solid #e2e8f0; border-radius: 12px; padding: 20px; margin-bottom: 20px;">
+
+            <!-- CASE DETAILS -->
+            <div style="display: flex; justify-content: space-between; gap: 10px; flex-wrap: wrap;">
+                <h3 style="margin: 0;">{{ case.case_id }}</h3>
+
+                <span style="background: #fef3c7; color: #92400e; padding: 5px 10px; border-radius: 20px; font-size: 12px; font-weight: bold;">
+                  {% if case.status == "Open" %}
+<span style="background: #dcfce7; color: #166534; padding: 5px 10px; border-radius: 20px; font-size: 12px; font-weight: bold;">
+● {{ case.status }}
+</span>
+{% elif case.status == "Under Review" %}
+<span style="background: #fef3c7; color: #92400e; padding: 5px 10px; border-radius: 20px; font-size: 12px; font-weight: bold;">
+● {{ case.status }}
+</span>
+{% elif case.status == "Closed" %}
+<span style="background: #e5e7eb; color: #374151; padding: 5px 10px; border-radius: 20px; font-size: 12px; font-weight: bold;">
+● {{ case.status }}
+</span>
+{% else %}
+<span style="background: #dbeafe; color: #1d4ed8; padding: 5px 10px; border-radius: 20px; font-size: 12px; font-weight: bold;">
+● {{ case.status }}
+</span>
+{% endif %}
+                </span>
+            </div>
+
+            <p>
+                <strong>Record A:</strong>
+                {{ case.student_1 }} ({{ case.student_1_id }})
+            </p>
+
+            <p>
+                <strong>Record B:</strong>
+                {{ case.student_2 }} ({{ case.student_2_id }})
+            </p>
+
+            <p>
+                <strong>Name similarity:</strong>
+                {{ case.name_similarity }}%
+            </p>
+
+            <p>
+                <strong>Created:</strong>
+                {{ case.created_at }}
+            </p>
+            <p style="margin-top: 14px;">
+                <strong>Reviewer Decision:</strong>
+                {% if case.decision == "Pending Review" %}
+                    <span style="display: inline-block; background: #dbeafe; color: #1d4ed8; padding: 5px 10px; border-radius: 20px; font-size: 12px; font-weight: bold;">
+                        ● Pending Review
+                    </span>
+                {% elif case.decision == "Potential Match - Further Verification" %}
+                    <span style="display: inline-block; background: #f3e8ff; color: #7e22ce; padding: 5px 10px; border-radius: 20px; font-size: 12px; font-weight: bold;">
+                        ● Potential Match — Further Verification
+                    </span>
+                {% elif case.decision == "More Information Required" %}
+                    <span style="display: inline-block; background: #ffedd5; color: #9a3412; padding: 5px 10px; border-radius: 20px; font-size: 12px; font-weight: bold;">
+                        ● More Information Required
+                    </span>
+                {% elif case.decision == "No Match" %}
+                    <span style="display: inline-block; background: #e5e7eb; color: #374151; padding: 5px 10px; border-radius: 20px; font-size: 12px; font-weight: bold;">
+                        ● No Match
+                    </span>
+                {% else %}
+                    <span style="display: inline-block; background: #f1f5f9; color: #475569; padding: 5px 10px; border-radius: 20px; font-size: 12px; font-weight: bold;">
+                        ● {{ case.decision }}
+                    </span>
+                {% endif %}
+            </p>
+
+            <!-- REVIEW REASONS -->
+            <p><strong>Review Reasons:</strong></p>
+
+            <ul>
+                {% for reason in case.reasons %}
+                    <li>{{ reason }}</li>
+                {% endfor %}
+            </ul>
+
+            <p style="font-size: 13px; color: #64748b;">
+                This is a potential match, not proof of duplicate identity
+                or fraud. Human review is required.
+            </p>
+
+            <!-- REVIEWER WORKSPACE -->
+            {% if case.status != "Closed" %}
+
+            <form method="POST"
+                  action="{{ url_for('update_case') }}"
+                  style="margin-top: 20px; padding: 18px; background: #f8fafc; border-radius: 10px;">
+
+                <input type="hidden" name="case_id" value="{{ case.case_id }}">
+
+                <h3>📝 Reviewer Workspace</h3>
+
+                <label><strong>Case Status</strong></label>
+
+                <select name="status" required
+                        style="display: block; width: 100%; box-sizing: border-box; padding: 10px; margin: 8px 0 16px; border: 1px solid #cbd5e1; border-radius: 8px;">
+
+                    <option value="Open" {% if case.status == "Open" %}selected{% endif %}>
+                        Open
+                    </option>
+
+                    <option value="Under Review" {% if case.status == "Under Review" %}selected{% endif %}>
+                        Under Review
+                    </option>
+
+                    <option value="Closed">
+                        Closed
+                    </option>
+
+                </select>
+
+                <label><strong>Reviewer Decision</strong></label>
+
+                <select name="decision" required
+                        style="display: block; width: 100%; box-sizing: border-box; padding: 10px; margin: 8px 0 16px; border: 1px solid #cbd5e1; border-radius: 8px;">
+
+                    <option value="Pending Review" {% if case.decision == "Pending Review" %}selected{% endif %}>
+                        Pending Review
+                    </option>
+
+                    <option value="Potential Match - Further Verification" {% if case.decision == "Potential Match - Further Verification" %}selected{% endif %}>
+                        Potential Match — Further Verification
+                    </option>
+
+                    <option value="No Match" {% if case.decision == "No Match" %}selected{% endif %}>
+                        No Match
+                    </option>
+
+                    <option value="More Information Required" {% if case.decision == "More Information Required" %}selected{% endif %}>
+                        More Information Required
+                    </option>
+
+                </select>
+
+                <label><strong>Investigation Notes</strong></label>
+
+                <textarea name="notes"
+                          rows="4"
+                          maxlength="2000"
+                          placeholder="Record observations and explain your decision..."
+                          style="display: block; width: 100%; box-sizing: border-box; padding: 12px; margin: 8px 0 16px; border: 1px solid #cbd5e1; border-radius: 8px;">{{ case.notes or "" }}</textarea>
+
+                <button type="submit"
+                        style="background: #2563eb; color: white; border: none; padding: 12px 20px; border-radius: 8px; font-weight: bold; cursor: pointer;">
+                    💾 SAVE REVIEW
+                </button>
+
+            </form>
+
+            {% else %}
+
+            <div style="margin-top: 18px; padding: 14px; background: #f0fdf4; border-radius: 8px;">
+                <strong>🔒 Case Closed</strong>
+                <p style="margin-bottom: 0;">
+                    Decision: {{ case.decision or "Not recorded" }}
+                </p>
+                <p style="margin-bottom: 0;">
+                    Notes: {{ case.notes or "No notes recorded." }}
+                </p>
+            </div>
+
+            {% endif %}
+
+           <!-- CASE ACTIVITY TIMELINE --><div style="margin-top: 24px; padding: 24px; background: #ffffff; border: 1px solid #e2e8f0; border-radius: 16px; box-shadow: 0 4px 14px rgba(15, 23, 42, 0.04);"><div style="display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; margin-bottom: 22px;">
+    <div>
+        <h3 style="margin: 0; color: #0f172a; font-size: 18px;">
+            📜 Case Activity Timeline
+        </h3>
+        <p style="margin: 6px 0 0; color: #64748b; font-size: 13px;">
+            Chronological record of investigation activity
+        </p>
+    </div>
+
+    <span style="padding: 6px 11px; background: #eff6ff; color: #1d4ed8; border: 1px solid #bfdbfe; border-radius: 20px; font-size: 12px; font-weight: 700;">
+        {{ case.history|length }} EVENTS
+    </span>
+</div>
+
+{% if case.history %}
+
+<div style="border-left: 2px solid #dbeafe; padding-left: 22px; margin-left: 7px;">
+
+    {% for event in case.history|reverse %}
+
+    <div style="position: relative; padding-bottom: 24px;">
+
+        <div style="position: absolute; left: -29px; top: 3px; width: 12px; height: 12px; background: #2563eb; border: 3px solid #dbeafe; border-radius: 50%; box-sizing: content-box;"></div>
+
+        <div style="padding: 14px 16px; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px;">
+
+            <strong style="display: block; color: #1e293b; font-size: 14px; line-height: 1.5;">
+                {{ event.action }}
+            </strong>
+
+            <p style="margin: 8px 0 0; color: #64748b; font-size: 12px;">
+                🕒 {{ event.timestamp }}
+            </p>
+
+            {% if event.notes %}
+            <div style="margin-top: 12px; padding: 10px 12px; background: #ffffff; border-left: 3px solid #93c5fd; border-radius: 6px;">
+                <span style="display: block; margin-bottom: 4px; color: #64748b; font-size: 11px; font-weight: 700; text-transform: uppercase;">
+                    Investigation Notes
+                </span>
+                <p style="margin: 0; color: #334155; font-size: 13px; line-height: 1.6; overflow-wrap: anywhere;">
+                    {{ event.notes }}
+                </p>
+            </div>
+            {% endif %}
+            {% if event.previous_notes is defined %}
+<div style="margin-top: 10px; padding: 10px 12px; background: #fff7ed; border-left: 3px solid #fb923c; border-radius: 6px;">
+<span style="display: block; margin-bottom: 4px; color: #9a3412; font-size: 11px; font-weight: 700; text-transform: uppercase;">
+Previous Investigation Notes
+</span>
+<p style="margin: 0; color: #7c2d12; font-size: 13px; line-height: 1.6; overflow-wrap: anywhere;">
+{{ event.previous_notes or "No previous notes recorded." }}
+</p>
+</div>
+{% endif %}
+
+
+        </div>
+    </div>
+
+    {% endfor %}
+
+</div>
+
+{% else %}
+
+<div style="padding: 24px; text-align: center; background: #f8fafc; border: 1px dashed #cbd5e1; border-radius: 12px;">
+    <div style="font-size: 28px; margin-bottom: 8px;">🗂️</div>
+    <strong style="color: #334155;">No activity recorded yet</strong>
+    <p style="margin: 6px 0 0; color: #64748b; font-size: 13px;">
+        Investigation events will appear here when activity is recorded.
+    </p>
+</div>
+
+{% endif %}
+
+<p style="margin: 18px 0 0; padding-top: 12px; border-top: 1px solid #f1f5f9; color: #94a3b8; font-size: 11px; line-height: 1.5;">
+    DEMONSTRATION AUDIT LOG · Displays events recorded in the application's saved case history.
+</p>
+
+</div>
+<!-- END CASE ACTIVITY TIMELINE -->
+
+        </div>
+        <!-- END INDIVIDUAL CASE -->
+
+        {% endfor %}
+
+    {% else %}
+
+        <div style="background: #f8fafc; padding: 20px; border-radius: 10px;">
+            <h3>No investigation cases yet</h3>
+            <p>
+                Go to Identity Detective, run an intelligence scan,
+                and create a case from a potential match.
+            </p>
+        </div>
+
+    {% endif %}
+
+</section>
+<!-- END INVESTIGATION CASE REGISTER -->
+
+    <section class="hero">
+        <span class="hero-label">MODULE D · EVIDENCE REVIEW</span>
+        <h2>Review the evidence before making a decision.</h2>
+        <p>
+            Records marked Pending Review are listed for human
+            examination. A pending status does not establish misconduct
+            or fraud.
+        </p>
+    </section>
+
+    <section class="grid">
+        <div class="card">
+            <div class="muted">Total demonstration records</div>
+            <div class="stat">{{ students|length }}</div>
+        </div>
+
+        <div class="card">
+            <div class="muted">Records awaiting review</div>
+            <div class="stat">{{ flagged|length }}</div>
+        </div>
+    </section>
+
+    <section class="card">
+        <h3>Review Queue</h3>
+
+        {% if flagged %}
+        <div class="table-wrap">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Record ID</th>
+                        <th>Student</th>
+                        <th>Institution</th>
+                        <th>Review status</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    {% for student in flagged %}
+                    <tr>
+                        <td>{{ student.id }}</td>
+                        <td>{{ student.name }}</td>
+                        <td>{{ student.institution }}</td>
+                        <td>
+                            <span class="badge pending">
+                                {{ student.status }}
+                            </span>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        {% else %}
+        <div class="empty">No records are currently awaiting review.</div>
+        {% endif %}
+    </section>
+
+    <section class="card">
+        <h3>Suggested review checklist</h3>
+        <p class="muted">
+            1. Examine the relevant student record.<br>
+            2. Check whether the required supporting documents are available.<br>
+            3. Compare the supplied information with authorized records.<br>
+            4. Document the findings and refer unresolved cases to an
+            authorized reviewer.
+        </p>
+    </section>
+
+    {% endif %}
+
+    <footer class="muted" style="padding:20px 0;">
+        APAAR NEXUS · Student records shown are fictional demonstration data.
+        No official APAAR verification is performed.
+    </footer>
+</main>
+
+</body>
+</html>

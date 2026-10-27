@@ -1,0 +1,55 @@
+[
+    {
+        "case_id": "NEXUS-20261027164218390193",
+        "student_1": "Aarav Sharma",
+        "student_1_id": "STU1001",
+        "student_2": "Aarav Sharma",
+        "student_2_id": "TEST1004",
+        "name_similarity": 100.0,
+        "reasons": [
+            "Name similarity: 100.0%",
+            "Same institution"
+        ],
+        "status": "Open",
+        "decision": "Pending Review",
+        "notes": "review is pending",
+        "created_at": "2026-10-27 16:42:18",
+        "history": [
+            {
+                "action": "Case created",
+                "timestamp": "2026-10-27 16:42:18"
+            },
+            {
+                "action": "Status: Open → Open; Decision: Pending Review",
+                "timestamp": "2026-10-27 16:50:15",
+                "notes": ""
+            },
+            {
+                "action": "Status: Open → Open; Decision: Pending Review",
+                "timestamp": "2026-10-27 17:26:48",
+                "notes": "review is pending"
+            }
+        ]
+    },
+    {
+        "case_id": "NEXUS-20261027180445284157",
+        "student_1": "",
+        "student_1_id": "",
+        "student_2": "",
+        "student_2_id": "",
+        "name_similarity": 0,
+        "reasons": [
+            "Flagged for manual review"
+        ],
+        "status": "Open",
+        "decision": "Pending Review",
+        "notes": "",
+        "created_at": "2026-10-27 18:04:45",
+        "history": [
+            {
+                "action": "Case created",
+                "timestamp": "2026-10-27 18:04:45"
+            }
+        ]
+    }
+]

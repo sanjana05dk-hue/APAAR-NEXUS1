@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>APAAR NEXUS | Intelligence Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+<div class="layout">
+    <aside class="sidebar">
+        <div class="brand">
+            <div class="brand-icon">N</div>
+            <div>
+                <h2>APAAR NEXUS</h2>
+                <span>ACADEMIC INTELLIGENCE</span>
+            </div>
+        </div>
+
+        <p class="menu-label">WORKSPACE</p>
+
+        <a class="nav-item active" href="/">▦ &nbsp; Overview</a>
+        <a class="nav-item" href="/detective">⌕ &nbsp; Identity Detective</a>
+        <a class="nav-item" href="/journey">◎ &nbsp; Academic Journey</a>
+        <a class="nav-item" href="/trustgraph">⌘ &nbsp; TrustGraph</a>
+        <a class="nav-item" href="/investigations">▤ &nbsp; Investigation Centre</a>
+
+        <div class="sidebar-bottom">
+            <div class="status-dot"></div>
+            <div>
+                <strong>DEMO ENVIRONMENT</strong>
+                <p>Using sample records only</p>
+            </div>
+        </div>
+    </aside>
+
+    <main class="main-content">
+        <header class="topbar">
+            <div>
+                <p class="eyebrow">ACADEMIC VERIFICATION PLATFORM</p>
+                <h1>Intelligence Dashboard</h1>
+            </div>
+            <div class="profile">
+                <div class="avatar">AN</div>
+                <div>
+                    <strong>Platform Admin</strong>
+                    <p>Prototype Workspace</p>
+                </div>
+            </div>
+        </header>
+
+        <section class="welcome-card">
+            <div>
+                <span class="badge">NEXUS INTELLIGENCE • DEMO</span>
+                <h2>Every record has a story.<br>Let's connect the evidence.</h2>
+                <p>Explore student records, identify potential matches, and organise cases requiring human review.</p>
+                <a class="primary-button" href="/detective">Launch Identity Detective →</a>
+            </div>
+            <div class="welcome-graphic">
+                <div class="orbit orbit-one"></div>
+                <div class="orbit orbit-two"></div>
+                <div class="core">N</div>
+                <span class="node node-one">ID</span>
+                <span class="node node-two">AI</span>
+                <span class="node node-three">✓</span>
+            </div>
+        </section>
+
+        <section class="section-heading">
+            <div>
+                <h2>Platform Overview</h2>
+                <p>A snapshot of the current demonstration dataset.</p>
+            </div>
+            <span class="live-label"><span></span> SAMPLE DATA</span>
+        </section>
+
+        <section class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-icon blue">▤</div>
+                <p>Total Student Records</p>
+                <h3>{{ total }}</h3>
+                <span>Records in demo dataset</span>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon green">✓</div>
+                <p>Marked Verified</p>
+                <h3>{{ verified }}</h3>
+                <span>Demo status, not official verification</span>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon orange">◷</div>
+                <p>Pending Review</p>
+                <h3>{{ pending }}</h3>
+                <span>Requires review in the prototype</span>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon purple">⌘</div>
+                <p>Platform Modules</p>
+                <h3>04</h3>
+                <span>Explore the workspace</span>
+            </div>
+        </section>
+
+        <section class="content-grid">
+            <div class="panel">
+                <div class="panel-heading">
+                    <div>
+                        <h2>Student Record Explorer</h2>
+                        <p>Sample records available for demonstration.</p>
+                    </div>
+                    <a href="/detective" class="text-link">Search records →</a>
+                </div>
+
+                <div class="table-wrap">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>STUDENT</th>
+                                <th>INSTITUTION</th>
+                                <th>ACADEMIC YEAR</th>
+                                <th>DEMO STATUS</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for student in students %}
+                            <tr>
+                                <td>
+                                    <strong>{{ student.name }}</strong>
+                                    <small>{{ student.id }}</small>
+                                </td>
+                                <td>{{ student.institution }}</td>
+                                <td>{{ student.year }}</td>
+                                <td>
+                                    <span class="status-pill {% if student.status == 'Verified' %}verified{% else %}pending{% endif %}">
+                                        {{ student.status }}
+                                    </span>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                <p class="disclaimer">Demonstration data only. Status labels do not represent official APAAR authentication.</p>
+            </div>
+
+            <div class="panel quick-panel">
+                <div class="panel-heading">
+                    <div>
+                        <h2>Quick Launch</h2>
+                        <p>Explore the platform's capabilities.</p>
+                    </div>
+                </div>
+
+                <a class="quick-link" href="/detective">
+                    <div class="quick-icon blue">⌕</div>
+                    <div><strong>Identity Detective</strong><p>Search for potential record matches.</p></div>
+                    <span>→</span>
+                </a>
+
+                <a class="quick-link" href="/journey">
+                    <div class="quick-icon purple">◎</div>
+                    <div><strong>Academic Journey</strong><p>Explore academic record summaries.</p></div>
+                    <span>→</span>
+                </a>
+
+                <a class="quick-link" href="/trustgraph">
+                    <div class="quick-icon green">⌘</div>
+                    <div><strong>TrustGraph</strong><p>Explore record relationships.</p></div>
+                    <span>→</span>
+                </a>
+
+                <a class="quick-link" href="/investigations">
+                    <div class="quick-icon orange">▤</div>
+                    <div><strong>Investigation Centre</strong><p>View the case-management workspace.</p></div>
+                    <span>→</span>
+                </a>
+            </div>
+        </section>
+
+        <footer>
+            <span>APAAR NEXUS © 2026</span>
+            <span>Academic Intelligence • Prototype Edition</span>
+        </footer>
+    </main>
+</div>
+
+</body>
+</html>
